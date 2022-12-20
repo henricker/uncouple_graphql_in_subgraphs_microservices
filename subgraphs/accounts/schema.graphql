@@ -1,0 +1,51 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key"])
+
+interface User {
+  id: ID!
+  name: String!
+  profilePicture: String!
+}
+
+type Host implements User @key(fields: "id") {
+  id: ID!
+  name: String!
+  profilePicture: String!
+  profileDescription: String!
+}
+
+type Guest implements User @key(fields: "id") {
+  id: ID!
+  name: String!
+  profilePicture: String!
+}
+
+type Query {
+  user(id: ID!): User
+  me: User!
+}
+
+interface MutationResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type UpdateProfileResponse implements MutationResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+  user: User
+}
+
+input UpdateProfileInput {
+  name: String
+  profilePicture: String
+  profileDescription: String
+}
+
+type Mutation {
+  updateProfile(input: UpdateProfileInput!): UpdateProfileResponse!
+}
+
