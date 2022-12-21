@@ -33,17 +33,11 @@ type Mutation {
 
   ### Bookings
   createBooking(createBookingInput: CreateBookingInput): CreateBookingResponse!
-
-  ### Wallet
-  addFundsToWallet(amount: Float!): AddFundsToWalletResponse!
 }
 
 interface MutationResponse {
-  "Similar to HTTP status code, represents the status of the mutation"
   code: Int!
-  "Indicates whether the mutation was successful"
   success: Boolean!
-  "Human-readable message for the UI"
   message: String!
 }
 
@@ -62,8 +56,6 @@ type Host implements User @key(fields: "id") {
 "A guest is a type of Airlock user. They book places to stay."
 type Guest implements User @key(fields: "id") {
   id: ID!
-  "Amount of money in the guest's wallet"
-  funds: Float!
 }
 
 ### Listings
@@ -246,17 +238,4 @@ type CreateBookingResponse implements MutationResponse {
 ### Reviews
 type Review @key(fields: "id"){
   id: ID!
-}
-
-### Payments
-
-type AddFundsToWalletResponse implements MutationResponse {
-  "Similar to HTTP status code, represents the status of the mutation"
-  code: Int!
-  "Indicates whether the mutation was successful"
-  success: Boolean!
-  "Human-readable message for the UI"
-  message: String!
-  "Updated wallet amount"
-  amount: Float
 }
