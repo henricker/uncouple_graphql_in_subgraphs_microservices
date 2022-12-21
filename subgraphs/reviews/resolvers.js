@@ -83,10 +83,10 @@ const resolvers = {
     hostReview: ({ id }, _, { dataSources }) => {
       return dataSources.reviewsDb.getReviewForBooking('HOST', id);
     },
-    locationReview: ({ id }, _, { dataSources }) => {
+    locationReview: async ({ id }, _, { dataSources }) => {
       return dataSources.reviewsDb.getReviewForBooking('LISTING', id);
     },
-  }
+  },
 };
 
 module.exports = resolvers;

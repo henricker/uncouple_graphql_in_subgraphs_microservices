@@ -55,6 +55,10 @@ type Host implements User @key(fields: "id"){
   overallRating: Float
 }
 
+type Guest implements User @key(fields: "id"){
+  id: ID!
+}
+
 type Listing @key(fields: "id"){
   id: ID!
   reviews: [Review]!

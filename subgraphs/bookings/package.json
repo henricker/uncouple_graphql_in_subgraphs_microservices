@@ -1,0 +1,34 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=14.0.0 <=18"
+  },
+  "scripts": {
+    "start": "nodemon index.js",
+    "deploy:graph:registry": "rover subgraph publish Airlock-hhb3ws@current --routing-url http://localhost:4005 --name bookings --schema ./schema.graphql --convert"
+  },
+  "nodemonConfig": {
+    "ext": "*.js, *.graphql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/datasource-rest": "^4.3.2",
+    "@apollo/server": "^4.0.1",
+    "@apollo/subgraph": "^2.1.3",
+    "axios": "^1.1.3",
+    "date-fns": "^2.29.3",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}

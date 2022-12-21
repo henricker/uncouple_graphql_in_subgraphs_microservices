@@ -1,0 +1,75 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key", "@shareable"])
+
+interface MutationResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type Booking @key(fields: "id"){
+  id: ID!
+  guest: Guest!
+  checkInDate: String!
+  checkOutDate: String!
+  status: BookingStatus!
+}
+
+type Listing @key(fields: "id"){
+  id: ID!
+  bookings: [Booking]!
+  numberOfUpcomingBookings: Int!
+  currentlyBookedDates: [ReservedDate]!
+}
+
+interface User {
+  id: ID!
+}
+
+type Guest implements User @key(fields: "id") {
+  id: ID!
+}
+
+enum BookingStatus {
+  CURRENT
+  COMPLETED
+  UPCOMING
+}
+
+type ReservedDate{
+  checkInDate: String! @shareable
+  checkOutDate: String! @shareable
+}
+
+
+input CreateBookingInput {
+  listingId: ID!
+  checkInDate: ID!
+  checkOutDate: ID!
+}
+
+type NewBookingResponse {
+  id: ID!
+  checkInDate: String!
+  checkOutDate: String!
+}
+
+type CreateBookingResponse implements MutationResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+  booking: NewBookingResponse
+}
+
+type Query {
+  bookingsForListing(listingId: ID!, status: BookingStatus): [Booking]!
+  guestBookings: [Booking]!
+  pastGuestBookings: [Booking]!
+  upcomingGuestBookings: [Booking]!
+  currentGuestBooking: Booking
+}
+
+type Mutation {
+   createBooking(createBookingInput: CreateBookingInput): CreateBookingResponse!
+}
