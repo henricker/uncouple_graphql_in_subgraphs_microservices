@@ -203,11 +203,6 @@ const resolvers = {
       }
     },
   },
-  Host: {
-    overallRating: ({ id }, _, { dataSources }) => {
-      return dataSources.reviewsDb.getOverallRatingForHost(id);
-    },
-  },
   Guest: {
     funds: async (_, __, { dataSources, userId }) => {
       const { amount } = await dataSources.paymentsAPI.getUserWalletAmount(userId);
@@ -217,12 +212,6 @@ const resolvers = {
   Listing: {
     host: ({ hostId }) => {
       return { id: hostId };
-    },
-    overallRating: ({ id }, _, { dataSources }) => {
-      return dataSources.reviewsDb.getOverallRatingForListing(id);
-    },
-    reviews: ({ id }, _, { dataSources }) => {
-      return dataSources.reviewsDb.getReviewsForListing(id);
     },
     totalCost: async ({ id }, { checkInDate, checkOutDate }, { dataSources }) => {
       const { totalCost } = await dataSources.listingsAPI.getTotalCost({ id, checkInDate, checkOutDate });
@@ -255,15 +244,6 @@ const resolvers = {
     totalPrice: async ({ listingId, checkInDate, checkOutDate }, _, { dataSources }) => {
       const { totalCost } = await dataSources.listingsAPI.getTotalCost({ id: listingId, checkInDate, checkOutDate });
       return totalCost;
-    },
-    guestReview: ({ id }, _, { dataSources }) => {
-      return dataSources.reviewsDb.getReviewForBooking('GUEST', id);
-    },
-    hostReview: ({ id }, _, { dataSources }) => {
-      return dataSources.reviewsDb.getReviewForBooking('HOST', id);
-    },
-    locationReview: ({ id }, _, { dataSources }) => {
-      return dataSources.reviewsDb.getReviewForBooking('LISTING', id);
     },
   },
   AmenityCategory: {

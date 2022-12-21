@@ -8,7 +8,8 @@
     "node": ">=14.0.0 <=18"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "deploy:graph:registry": "rover subgraph publish Airlock-hhb3ws@current --routing-url http://localhost:4003 --name reviews --schema ./schema.graphql"
   },
   "nodemonConfig": {
     "ext": "*.js, *.graphql"

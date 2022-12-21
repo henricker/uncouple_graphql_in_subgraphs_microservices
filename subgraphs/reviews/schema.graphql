@@ -49,3 +49,21 @@ type Mutation {
 interface User {
   id: ID!
 }
+
+type Host implements User @key(fields: "id"){
+  id: ID!
+  overallRating: Float
+}
+
+type Listing @key(fields: "id"){
+  id: ID!
+  reviews: [Review]!
+  overallRating: Float
+}
+
+type Booking @key(fields: "id"){
+  id: ID!
+  locationReview: Review
+  hostReview: Review
+  guestReview: Review
+}

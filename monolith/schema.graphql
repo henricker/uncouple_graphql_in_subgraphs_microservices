@@ -57,8 +57,6 @@ interface User {
 "A host is a type of Airlock user. They own listings."
 type Host implements User @key(fields: "id") {
   id: ID!
-  "The overall calculated rating for the host"
-  overallRating: Float
 }
 
 "A guest is a type of Airlock user. They book places to stay."
@@ -71,35 +69,19 @@ type Guest implements User @key(fields: "id") {
 ### Listings
 
 "A listing is a location owned by a host. A listing has a list of amenities it offers. Listings have a fixed cost per night value."
-type Listing {
+type Listing @key(fields: "id"){
   id: ID!
-  "The listing's title"
   title: String!
-  "The listing's description"
   description: String!
-  "The thumbnail image for the listing"
   photoThumbnail: String!
-  "The number of beds available"
   numOfBeds: Int!
-  "The cost per night"
   costPerNight: Float!
-  "The location type of the listing"
   locationType: LocationType!
-  "Owner of the listing"
   host: Host!
-  "The amenities available for this listing"
   amenities: [Amenity]!
-  "The list of bookings for a listing"
   bookings: [Booking]!
-  "The number of current and upcoming bookings for a listing"
   numberOfUpcomingBookings: Int!
-  "An array of upcoming reserved dates that the listing has been booked for"
   currentlyBookedDates: [ReservedDate]!
-  "The submitted reviews for this listing"
-  reviews: [Review]!
-  "The overall calculated rating for a listing"
-  overallRating: Float
-  "Calculated total cost of the listing with the given arguments"
   totalCost(checkInDate: String!, checkOutDate: String!): Float!
 }
 
@@ -141,11 +123,8 @@ input SearchListingsInput {
   checkInDate: String!
   checkOutDate: String!
   numOfBeds: Int
-  "The page in the search results, defaults to 1"
   page: Int
-  "The number of listings you can display in a page, defaults to 5"
   limit: Int
-  "The results sort order, defaults to cost descending"
   sortBy: SortByCriteria
 }
 
@@ -218,26 +197,14 @@ type UpdateListingResponse implements MutationResponse {
 ### Bookings
 
 "A booking is a reservation for a specific listing"
-type Booking {
+type Booking @key(fields: "id"){
   id: ID!
-  "The listing associated with the reservation"
   listing: Listing!
-  "The guest that reserved the location"
   guest: Guest!
-  "Check-in date for the reservation"
   checkInDate: String!
-  "Check-out date for the reservation"
   checkOutDate: String!
-  "Total price paid, calculated using the listing's costPerNight and the check-in check-out dates"
   totalPrice: Float!
-  "The status of the booking - check BookingStatus type for all possibilities"
   status: BookingStatus!
-  "The guest's review of the location"
-  locationReview: Review
-  "The guest's review about the host"
-  hostReview: Review
-  "The host's review about the guest"
-  guestReview: Review
 }
 
 "The status of a booking"
