@@ -8,7 +8,12 @@
 
 - Por se tratar de uma aplicação para fins de estudo, considere que a pasta service possuem apis, bancos de dados onde os microserviços utilizam para fazer a persistência de dados.
 
+## Para que serve o Apollo Federation ?
+
+ - O Apollo Federation é uma ferramenta que nos ajuda a criar meios de desenvolver um grande grafo a partir de pequenos subgrafos, criando serviços pequenos e independentes que podem ser facilmente integrados e escaláveis.
+
 ## Até agora já desacoplamos
 - [x] - Accounts 
 - [x] - Reviews
 - [x] - Payments
+- [x] - Bookings
