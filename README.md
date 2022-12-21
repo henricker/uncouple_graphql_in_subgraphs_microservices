@@ -8,7 +8,7 @@
 
 - Por se tratar de uma aplicação para fins de estudo, considere que a pasta service possuem apis, bancos de dados onde os microserviços utilizam para fazer a persistência de dados.
 
-
 ## Até agora já desacoplamos
 - [x] - Accounts 
 - [x] - Reviews
+- [x] - Payments
